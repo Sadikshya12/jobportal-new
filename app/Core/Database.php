@@ -2,21 +2,27 @@
 
 namespace App\Core;
 
-class Database {
+class Database
+{
 
     protected static $connection;
 
-    public static function connect(){
+    public static function connect()
+    {
 
-        if (!isset(self::$connection)){
-            global $config;
-            self::$connection = new \mysqli ($config['db']['host'], $config['db']['username'],
-                $config['db']['password'],$config['db']['database']);
+        if (!isset(self::$connection)) {
+            self::$connection = new \mysqli (
+                config('database.hostname'),
+                config('database.username'),
+                config('database.password'),
+                config('database.database')
+            );
         }
 
-        if (self::$connection===false){
+        if (self::$connection === false) {
             return false;
         }
+
         return self::$connection;
 
     }

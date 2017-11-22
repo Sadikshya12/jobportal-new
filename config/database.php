@@ -1,6 +1,8 @@
 <?php
 
-$config['db']['hostname'] = 'localhost';
-$config['db']['database'] = 'jobportal';
-$config['db']['username'] = 'root';
-$config['db']['password'] = 'root';
+return [
+    'hostname' => 'localhost',
+    'database' => 'jobportal',
+    'username' => 'root',
+    'password' => 'root'
+];
