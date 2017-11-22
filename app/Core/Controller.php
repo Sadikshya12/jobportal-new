@@ -10,7 +10,7 @@ class Controller
             extract($data);
         }
 
-        $path = dirname(__DIR__) . '/Views/' . $view . '.php';
+        $path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $view . '.php';
         include $path;
     }
 
