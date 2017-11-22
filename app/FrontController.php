@@ -10,9 +10,12 @@ class FrontController {
     protected $controller    = self::DEFAULT_CONTROLLER;
     protected $action        = self::DEFAULT_ACTION;
     protected $params        = array();
-    protected $basePath      = "/";
+    protected $basePath      = '';
 
     public function __construct(array $options = array()) {
+
+        $this->basePath = config('app.base_path');
+
         if (empty($options)) {
             $this->parseUri();
         }
@@ -51,20 +54,20 @@ class FrontController {
 
     public function setController($controller) {
         $controller = ucfirst(strtolower($controller)) . "Controller";
-        if (!class_exists($controller)) {
-            throw new \InvalidArgumentException(
-                "The action controller '$controller' has not been defined.");
-        }
+//        if (!class_exists($controller)) {
+//            throw new \InvalidArgumentException(
+//                "The action controller '$controller' has not been defined.");
+//        }
         $this->controller = $controller;
         return $this;
     }
 
     public function setAction($action) {
-        $reflector = new \ReflectionClass($this->controller);
-        if (!$reflector->hasMethod($action)) {
-            throw new \InvalidArgumentException(
-                "The controller action '$action' has been not defined.");
-        }
+//        $reflector = new \ReflectionClass($this->controller);
+//        if (!$reflector->hasMethod($action)) {
+//            throw new \InvalidArgumentException(
+//                "The controller action '$action' has been not defined.");
+//        }
         $this->action = $action;
         return $this;
     }
