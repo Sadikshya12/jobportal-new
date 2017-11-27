@@ -1,6 +1,6 @@
 <?php $this->render('includes/header') ?>
 <div row="class">
-    <form id="register" action="index.php?action=user_controller" method="post" >
+    <form id="register" action="/index/register" method="post">
         <h3>Registration</h3>
 
         <table align="center" width="30%" border="0">

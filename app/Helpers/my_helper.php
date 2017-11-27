@@ -18,3 +18,36 @@ function config($args)
     $config = include '.' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . $args[0] . '.php';
     return $config[$args[1]];
 }
+
+function set_flash($type, $message)
+{
+    $session = new \App\Core\Session();
+    $session->set('flash', [
+        'type' => $type,
+        'msg' => $message
+    ]);
+}
+
+function display_flash(){
+    $session = new \App\Core\Session();
+    $flash = $session->get('flash');
+
+    if(!$flash){
+        return;
+    }
+
+    echo '<div class="alert alert-'.$flash['type'].'">';
+    echo $flash['msg'];
+    echo '</div>';
+
+    $session->remove('flash');
+}
+
+function isLoggedIn(){
+    $session = new \App\Core\Session();
+    if($session->get('logged_in_user_id')){
+        return true;
+    }
+
+    return false;
+}

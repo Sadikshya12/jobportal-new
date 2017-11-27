@@ -3,7 +3,8 @@
     <div class="col-md-4 col-md-offset-4">
        <fieldset>
         <legend>User Login</legend>
-        <form id="login" action="index.php?action=user_controller" method="post">
+           <?php display_flash() ?>
+        <form id="login" action="/index/login" method="post">
             <form>
                 Username: <input type="text" name="username" />
                 <br><br>
