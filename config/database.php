@@ -2,7 +2,7 @@
 
 return [
     'hostname' => 'localhost',
-    'database' => 'job',
+    'database' => 'jobportal',
     'username' => 'root',
-    'password' => ''
+    'password' => 'root'
 ];
