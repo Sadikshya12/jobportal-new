@@ -6,6 +6,15 @@ use App\Core\Controller;
 
 class UserController extends Controller
 {
+
+    public function __construct(){
+            parent::__construct();
+        if(!isLoggedIn()){
+            set_flash('danger', 'you need to be logged in.');
+            $this->redirect('/index/login');
+        }
+    }
+
     public function index()
     {
         return $this->render('user');
