@@ -51,6 +51,11 @@ class Model
         return $this;
     }
 
+    public function raw_query($sql){
+        $this->sql = $sql;
+        return $this;
+    }
+
     public function fetch_rows()
     {
 
