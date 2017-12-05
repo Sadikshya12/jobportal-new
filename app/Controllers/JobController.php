@@ -35,6 +35,13 @@ class JobController extends Controller
         return $this->render('Job/jobdescription', $view_data);
     }
 
+     public function enterjobdescription()
+    {
+        //$job = new Job();
+        //$view_data['job'] = $job->getById($job_id);
+        return $this->render('Job/enterjobdescription');
+    }
+
     public function logout(){
         $this->session->remove('logged_in_user_id');
         set_flash('success', 'Logout success.');

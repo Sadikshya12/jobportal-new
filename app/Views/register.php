@@ -7,6 +7,7 @@
             <tr>
                 <td>First Name: </td>
                 <td><input type="text" name="fname" placeholder="First Name" class="required"  /></td>
+
             </tr>
             <tr>
                 <td>Second Name: </td>
@@ -32,6 +33,10 @@
                 <td>Country: </td>
                 <td><input type="text" name="country" placeholder="Country" class="required"  /></td>
             </tr>
+            <!-- <tr>
+                <td> <input type="file" name="pic" accept="image/*"></td>
+                <td><input type="submit"></td>
+            </tr> -->
             <tr><td>User Type</td>
                 <td>
                 <div class="radio">
