@@ -15,7 +15,7 @@
 		<td><?= ++$index ?></td>
 		<td><?= $job->title ?></td>
 		<td><?= $job->created_at ?></td>
-		<td><a href="/job/jobdescription/<?= $job->id ?>">View Details</a></td>
+		<td><a href="/job/details/<?= $job->id ?>">View Details</a></td>
 	</tr>
 <?php endforeach; ?>
 	</tbody>

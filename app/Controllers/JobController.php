@@ -28,12 +28,28 @@ class JobController extends Controller
         return $this->render('Job/latest', $view_data);
     }
 
-     public function jobdescription($job_id)
+     public function details($job_id)
     {
         $job = new Job();
         $view_data['job'] = $job->getById($job_id);
         return $this->render('Job/jobdescription', $view_data);
     }
+
+    public function housecleaning()
+    {
+                return $this->render('Job/housecleaning');
+    }
+
+    public function gardening()
+    {
+        return $this->render('Job/gardening');
+    }
+
+    public function waitress()
+    {
+        return $this->render('Job/waitress');
+    }
+
 
     public function logout(){
         $this->session->remove('logged_in_user_id');
