@@ -60,6 +60,11 @@ class Model
     {
 
         $query = $this->db->query($this->sql);
+
+        if(!$query){
+            return null;
+        }
+
         $rows = [];
         while ($row = mysqli_fetch_object($query)) {
             array_push($rows, $row);
@@ -71,6 +76,10 @@ class Model
     public function fetch_row()
     {
         $query = $this->db->query($this->sql);
+        if(!$query){
+            return null;
+        }
+
         $row = mysqli_fetch_object($query);
         return $row;
     }

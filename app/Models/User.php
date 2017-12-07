@@ -12,9 +12,8 @@ class User extends Model {
         parent::__construct();
     }
 
-    public function isLoggedIn()
+    public function isLoggedIn(Session $session)
     {
-        $session = new Session();
         if($session->get('_logged_in_user_id')){
             return true;
         }
