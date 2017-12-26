@@ -18,3 +18,8 @@ To run specific Test Suite:
 ```
 phpunit --testsuite test_suit_name
 ```
+
+To view test status:
+```
+http://localhost:8000/tests/codeCoverage/index.html
+```
