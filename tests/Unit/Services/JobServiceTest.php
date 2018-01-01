@@ -26,7 +26,7 @@ class JobServiceTest extends TestCase
         $job = new JobService($jobRepo);
         $latestJobs = $job->getAllLatest();
 
-        $this->assertObjectHasAttribute('id', $latestJobs[0]);
+        $this->assertEquals(1, $this->count($latestJobs));
 
     }
 
@@ -46,9 +46,67 @@ class JobServiceTest extends TestCase
         $this->assertObjectHasAttribute('id', $jobById);
     }
 
+    public function testPostNewJob(){
+
+        $jobRepo = $this->mockRepo();
+        $jobRepo->method('create')
+            ->willReturn(true);
+
+        $job = new JobService($jobRepo);
+        $result = $job->postNewJob([
+            'title' => 'hello',
+            'description' => 'world',
+            'location' => 'test',
+        ], 1);
+
+        $this->assertTrue($result);
+    }
+
+    public function testGetByUserId(){
+
+        $row = new \stdClass();
+        $row->id = 1;
+        $row->name = 'test';
+        $result = [$row];
+
+        // Mock job repo
+        $jobRepo = $this->mockRepo();
+        $jobRepo->method('findByUserId')
+            ->willReturn($result);
+
+        $job = new JobService($jobRepo);
+        $result = $job->getByUserId(1);
+
+        $this->assertEquals(1, $this->count($result));
+    }
+
+    public function testDelete(){
+
+        $row = new \stdClass();
+        $row->id = 1;
+        $row->user_id = 1;
+
+        $jobRepo = $this->mockRepo();
+        $jobRepo->method('delete')
+            ->willReturn(true);
+        $jobRepo->method('getById')
+            ->willReturn($row);
+
+        $job = new JobService($jobRepo);
+        $result = $job->delete(1, 1);
+
+        $this->assertTrue($result);
+    }
+
     private function mockRepo(){
         return $this->getMockBuilder(JobInterface::class)
-            ->setMethods(['getAllLatest', 'getById'])
+            ->setMethods([
+                'getAllLatest',
+                'getById',
+                'create',
+                'findByUserId',
+                'delete'
+            ])
             ->getMock();
     }
 

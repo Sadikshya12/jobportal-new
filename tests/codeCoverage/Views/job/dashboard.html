@@ -2,14 +2,14 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /var/www/html/jobportal-new/app/Repositories</title>
+  <title>Dashboard for /var/www/html/jobportal-new/app/Views/job</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/nv.d3.min.css" rel="stylesheet">
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
   <!--[if lt IE 9]>
-  <script src="../js/html5shiv.min.js"></script>
-  <script src="../js/respond.min.js"></script>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
   <![endif]-->
  </head>
  <body>
@@ -18,8 +18,9 @@
     <div class="row">
      <div class="col-md-12">
       <ol class="breadcrumb">
-        <li><a href="../index.html">/var/www/html/jobportal-new/app</a></li>
-        <li><a href="index.html">Repositories</a></li>
+        <li><a href="../../index.html">/var/www/html/jobportal-new/app</a></li>
+        <li><a href="../index.html">Views</a></li>
+        <li><a href="index.html">job</a></li>
         <li class="active">(Dashboard)</li>
 
       </ol>
@@ -59,8 +60,6 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#9">MySQLUserRepository</a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#8">MySQLJobRepository</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -114,18 +113,6 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#28"><abbr title="MySQLUserRepository::create">create</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#20"><abbr title="MySQLUserRepository::findByUserEmailPass">findByUserEmailPass</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#33"><abbr title="MySQLUserRepository::findByUsername">findByUsername</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#42"><abbr title="MySQLUserRepository::findByEmail">findByEmail</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#51"><abbr title="MySQLUserRepository::findById">findById</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLUserRepository.php.html#14"><abbr title="MySQLUserRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#46"><abbr title="MySQLJobRepository::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#18"><abbr title="MySQLJobRepository::getAllLatest">getAllLatest</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#25"><abbr title="MySQLJobRepository::getById">getById</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#32"><abbr title="MySQLJobRepository::create">create</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#37"><abbr title="MySQLJobRepository::findByUserId">findByUserId</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="Mysql/MySQLJobRepository.php.html#12"><abbr title="MySQLJobRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -155,11 +142,11 @@
     </p>
    </footer>
   </div>
-  <script src="../js/jquery.min.js" type="text/javascript"></script>
-  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="../js/holder.min.js" type="text/javascript"></script>
-  <script src="../js/d3.min.js" type="text/javascript"></script>
-  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.min.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
   <script type="text/javascript">
 $(document).ready(function() {
   nv.addGraph(function() {
@@ -172,7 +159,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -190,7 +177,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([12,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -240,7 +227,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[0,6,"<a href=\"Mysql\/MySQLJobRepository.php.html#8\">MySQLJobRepository<\/a>"],[0,6,"<a href=\"Mysql\/MySQLUserRepository.php.html#9\">MySQLUserRepository<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -264,7 +251,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#12\">MySQLJobRepository::__construct<\/a>"],[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#18\">MySQLJobRepository::getAllLatest<\/a>"],[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#25\">MySQLJobRepository::getById<\/a>"],[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#32\">MySQLJobRepository::create<\/a>"],[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#37\">MySQLJobRepository::findByUserId<\/a>"],[0,1,"<a href=\"Mysql\/MySQLJobRepository.php.html#46\">MySQLJobRepository::delete<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#14\">MySQLUserRepository::__construct<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#20\">MySQLUserRepository::findByUserEmailPass<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#28\">MySQLUserRepository::create<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#33\">MySQLUserRepository::findByUsername<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#42\">MySQLUserRepository::findByEmail<\/a>"],[0,1,"<a href=\"Mysql\/MySQLUserRepository.php.html#51\">MySQLUserRepository::findById<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

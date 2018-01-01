@@ -33,7 +33,7 @@ class JobService
             'location' => $post['location'],
         ];
 
-        $this->job->create($jobData);
+        return $this->job->create($jobData);
 
     }
 
