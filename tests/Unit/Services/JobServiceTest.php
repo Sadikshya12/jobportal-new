@@ -98,6 +98,25 @@ class JobServiceTest extends TestCase
         $this->assertTrue($result);
     }
 
+    public function testDeleteException(){
+
+        $row = new \stdClass();
+        $row->id = 1;
+        $row->user_id = 2;
+
+        $jobRepo = $this->mockRepo();
+        $jobRepo->method('delete')
+            ->willReturn(true);
+        $jobRepo->method('getById')
+            ->willReturn($row);
+
+        $job = new JobService($jobRepo);
+
+        $this->expectException(\Exception::class);
+        $job->delete(1, 1);
+
+    }
+
     private function mockRepo(){
         return $this->getMockBuilder(JobInterface::class)
             ->setMethods([
