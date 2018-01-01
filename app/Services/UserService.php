@@ -41,7 +41,7 @@ class UserService
             throw new \Exception('Password must be atleast 6 character long.');
         }
 
-        $this->user->create($userData);
+        return $this->user->create($userData);
 
     }
 
