@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 require __DIR__.'/vendor/autoload.php';
 
-use App\FrontController as FrontController;
+use App\Router as Router;
 
-$fc = new FrontController();
+$fc = new Router();
 $fc->run();

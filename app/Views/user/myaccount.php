@@ -1,25 +1,42 @@
 <?php $this->render('includes/header') ?>
-<?php
-//if (!isset($_SESSION['username'])){
-  //header('Location: index.php?action=login');
-//}
-?>
 
+    <h1>My Account
+    <div class="pull-right">
+        <a href="/job/post_new" class="btn btn-success">Post New Job</a>
+        <a href="/job/posted" class="btn btn-info">View My Posted Jobs</a>
+    </div>
+    </h1>
+    <div class="form-group">
+        <label>First name</label>
+        <p class="form-control-static"><?= $user->first_name ?></p>
+    </div>
+    <div class="form-group">
+        <label>Second name</label>
+        <p class="form-control-static"><?= $user->second_name ?></p>
+    </div>
+    <div class="form-group">
+        <label>Username</label>
+        <p class="form-control-static"><?= $user->username ?></p>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <p class="form-control-static"><?= $user->email ?></p>
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <p class="form-control-static"><?= $user->address ?></p>
+    </div>
+    <div class="form-group">
+        <label>Country</label>
+        <p class="form-control-static"><?= $user->country ?></p>
+    </div>
+    <div class="form-group">
+        <label>User Type</label>
+        <p class="form-control-static"><?= $user->user_type ?></p>
+    </div>
+    <div class="form-group">
+        <label>Registered At</label>
+        <p class="form-control-static"><?= $user->created_at ?></p>
+    </div>
 
-<?php
-//$id = $_SESSION['id'];
-//$user = new User();
-//$udetail = $user->edit($id);
-
-?>
-
-
-
-
-<h1>My Account</h1>
-
-
-<h2>Details
-
-<?php //echo $udetail[0]['username']; ?></h2>
 <?php $this->render('includes/footer') ?>

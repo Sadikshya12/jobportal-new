@@ -4,21 +4,29 @@ namespace App\Controllers;
 
 use App\Core\Auth;
 use App\Core\Controller;
-use App\Models\User;
+use App\Core\Database;
+use App\Core\Model;
+use App\Core\Session;
+use App\Repositories\Mysql\MySQLJobRepository;
+use App\Repositories\Mysql\MySQLUserRepository;
+use App\Services\JobService;
+use App\Services\UserService;
 
 class IndexController extends Controller
 {
-    protected $user;
+    protected $userService;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->user = new User();
+        $this->userService = new UserService(new MySQLUserRepository(new Database()));
+        $this->jobService = new JobService(new MySQLJobRepository(new Database()));
     }
 
     public function index()
     {
-        return $this->render('home');
+        $jobs = $this->jobService->getAllLatest();
+        $view_data['jobs'] = $jobs;
+        return $this->render('home', $view_data);
     }
 
     public function contact()
@@ -72,22 +80,13 @@ class IndexController extends Controller
         }
 
         if ($_POST) {
-
-            $user = $this->user
-                ->where([
-                    'username' => $_POST['username'],
-                    'password' => $_POST['password']
-                ])
-                ->fetch_row();
-
-            if (!$user) {
-                set_flash('danger', 'Invalid username/password.');
+            try {
+                $this->userService->loginWithPostData($_POST, new Session());
+                $this->redirect('/user/myaccount');
+            } catch (\Exception $e) {
+                set_flash('danger', $e->getMessage());
                 $this->redirect('/index/login');
             }
-
-            $this->session->set('logged_in_user_id', $user->id);
-            $this->redirect('/user/myaccount');
-
         }
 
         return $this->render('login');
@@ -96,22 +95,15 @@ class IndexController extends Controller
     public function register()
     {
         if ($_POST) {
-
-            $userData = [
-                'first_name' => $_POST['fname'],
-                'second_name' => $_POST['sname'],
-                'username' => $_POST['username'],
-                'password' => $_POST['password'],
-                'email' => $_POST['email'],
-                'address' => $_POST['address'],
-                'country' => $_POST['country'],
-                'user_type' => $_POST['user_type']
-            ];
-
-            $this->user->insert($userData);
-            set_flash('success', 'Register success.');
-            $this->redirect('/index/login');
-
+            try {
+                $this->userService->registerWithPostData($_POST);
+                set_flash('success', 'Register success.');
+                $this->redirect('/index/login');
+            } catch (\Exception $e) {
+                set_inputs($_POST);
+                set_flash('danger', $e->getMessage());
+                $this->redirect('/index/register');
+            }
         }
 
         return $this->render('register');

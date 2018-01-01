@@ -21,27 +21,27 @@
       <th>Job Role/Type</th>
       <th>Description</th>
       <th>Location</th>
+        <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>House Cleaning</td>
-      <td>Cleaning the windows and Carpets </td>
-      <td>Osterly</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Gardening</td>
-      <td>Planting, removing waste and trimming </td>
-      <td>Guildford</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Waitress</td>
-      <td>Cleaning plates, Cleaning after party, Serving</td>
-      <td>Arnovs Grove</td>
-    </tr>
+  <?php if($jobs): ?>
+      <?php foreach($jobs as $index => $job): ?>
+          <tr>
+              <td><?= ++$index ?></td>
+              <td>
+                  <a href="/job/details/<?= $job->id ?>">
+                      <?= $job->title ?>    
+                  </a>
+              </td>
+              <td><?= $job->description ?></td>
+              <td><?= $job->location ?></td>
+              <td>
+                  <a href="/job/apply/<?= $job->id ?>" class="btn btn-success">Apply</a>
+              </td>
+          </tr>
+          <?php endforeach; ?>
+    <?php endif; ?>
   </tbody>
 </table>
 

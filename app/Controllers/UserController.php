@@ -3,10 +3,14 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-use App\Models\User;
+use App\Core\Database;
+use App\Repositories\Mysql\MySQLUserRepository;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
+
+    protected $userService;
 
     public function __construct(){
             parent::__construct();
@@ -14,6 +18,8 @@ class UserController extends Controller
             set_flash('danger', 'you need to be logged in.');
             $this->redirect('/index/login');
         }
+
+        $this->userService = new UserService(new MySQLUserRepository(new Database()));
     }
 
     public function index()
@@ -23,7 +29,10 @@ class UserController extends Controller
 
     public function myaccount()
     {
-        return $this->render('user/myaccount');
+        $user = $this->userService->findById($this->session->get('logged_in_user_id'));
+
+        $view_data['user'] = $user;
+        return $this->render('user/myaccount', $view_data);
     }
 
     public function logout(){

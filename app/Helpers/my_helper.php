@@ -51,3 +51,22 @@ function isLoggedIn(){
 
     return false;
 }
+
+function set_inputs($request){
+    $session = new \App\Core\Session();
+    $session->set('inputs', $request);
+}
+
+function input($field){
+    $session = new \App\Core\Session();
+    $inputs = $session->get('inputs');
+
+    if(isset($inputs[$field])){
+        $val = $inputs[$field];
+
+        unset($inputs[$field]);
+        $session->set('inputs', $inputs);
+
+        return $val;
+    }
+}
