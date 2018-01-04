@@ -4,9 +4,10 @@ namespace App\Tests\Unit\Services;
 
 use App\Repositories\UserInterface;
 use App\Services\UserService;
-use PHPUnit\Framework\TestCase;
+//use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_TestCase;
 
-class UserServiceTest extends TestCase
+class UserServiceTest extends PHPUnit_Framework_TestCase
 {
 
     /**

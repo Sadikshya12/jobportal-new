@@ -9,6 +9,7 @@
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/jquery.validate.js"></script>
     <script src="/assets/js/jquery-2.1.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
     <script src="/assets/js/app.js"></script>
 </head>
 

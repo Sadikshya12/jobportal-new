@@ -19,9 +19,8 @@
     <tr>
       <th>S.No</th>
       <th>Job Role/Type</th>
-      <th>Description</th>
       <th>Location</th>
-        <th></th>
+        <th width=10%></th>
     </tr>
   </thead>
   <tbody>
@@ -34,10 +33,9 @@
                       <?= $job->title ?>    
                   </a>
               </td>
-              <td><?= $job->description ?></td>
               <td><?= $job->location ?></td>
               <td>
-                  <a href="/job/apply/<?= $job->id ?>" class="btn btn-success">Apply</a>
+                <a href="/job/details/<?= $job->id ?>" class="btn btn-success">View Details</a>
               </td>
           </tr>
           <?php endforeach; ?>

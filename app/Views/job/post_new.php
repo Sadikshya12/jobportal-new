@@ -9,6 +9,9 @@
         <div class="form-group">
             <label>Description</label>
             <textarea class="form-control" name="description" rows="4"><?= input('description') ?></textarea>
+            <script>
+            CKEDITOR.replace( 'description' );
+        </script>
         </div>
         <div class="form-group">
             <label>Location</label>

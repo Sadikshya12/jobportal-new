@@ -4,10 +4,11 @@ namespace App\Tests\Unit\Services;
 
 use App\Repositories\JobInterface;
 use App\Repositories\Mysql\MySQLJobRepository;
-use PHPUnit\Framework\TestCase;
 use App\Services\JobService;
+use PHPUnit_Framework_TestCase;
 
-class JobServiceTest extends TestCase
+
+class JobServiceTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetAllLatest()
