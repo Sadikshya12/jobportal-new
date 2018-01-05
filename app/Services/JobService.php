@@ -2,16 +2,22 @@
 
 namespace App\Services;
 
+use App\Repositories\ApplicationInterface;
 use App\Repositories\JobInterface;
 
 class JobService
 {
 
     protected $job;
+    protected $application;
 
-    public function __construct(JobInterface $jobRepository)
+    public function __construct(
+        JobInterface $jobRepository,
+        ApplicationInterface $applicationRepository = null
+    )
     {
         $this->job = $jobRepository;
+        $this->application = $applicationRepository;
     }
 
     public function getAllLatest()
@@ -46,7 +52,7 @@ class JobService
     {
 
         $job = $this->job->getById($jobId);
-        if($job->user_id != $loggedInUserId){
+        if ($job->user_id != $loggedInUserId) {
             throw new \Exception('Sorry you are not authorized to delete this booking.');
         }
 
@@ -56,6 +62,27 @@ class JobService
     public function search($request)
     {
         return $this->job->search($request);
+    }
+
+    public function apply($jobId, $userId)
+    {
+
+        if($this->application->findByJobAndUserId($jobId, $userId)){
+            throw new \Exception('Job already applied.');
+        }
+
+        $appData = [
+            'job_id' => $jobId,
+            'user_id' => $userId,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        return $this->application->insert($appData);
+    }
+
+    public function getAllAppliedJobs($userId)
+    {
+        return $this->job->getAllAppliedJobs($userId);
     }
 
 }

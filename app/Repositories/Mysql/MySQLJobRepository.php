@@ -71,4 +71,15 @@ class MySQLJobRepository implements JobInterface
         return $result;
 
     }
+
+    public function getAllAppliedJobs($userId)
+    {
+        $sql = "SELECT jobs.* FROM jobs";
+        $sql .= " JOIN applications ON applications.job_id = jobs.id";
+        $sql .= " WHERE applications.user_id = $userId";
+
+        $result = $this->db->raw_query($sql)->fetch_rows();
+        return $result;
+    }
+
 }

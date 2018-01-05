@@ -1,8 +1,11 @@
 <?php $this->render('includes/header') ?>
 
-<h1>Job Descripton</h1>
+<?php display_flash() ?>
 
-<p><b>Title: </b><?= $job->title ?></p>
+    <h1><?= $job->title ?></h1>
 <?= $job->description ?>
+
+    <br>
+    <a href="/job/apply/<?= $job->id ?>" class="btn btn-success">Apply this job</a>
 
 <?php $this->render('includes/footer') ?>

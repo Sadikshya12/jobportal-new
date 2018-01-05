@@ -78,9 +78,12 @@ class Database
         $conditions = [];
         foreach ($data as $key => $value) {
 
-            list($column, $operator) = explode(' ', $key);
+            $exploded = explode(' ', $key);
 
-            if(isset($operator)){
+            $column = isset($exploded[0]) ? $exploded[0] : null;
+            $operator = isset($exploded[1]) ? $exploded[1] : null;
+
+            if($operator){
                 $conditions[] = "`$column` $operator '$value'";
             } else {
                 $conditions[] = "`$column` = '$value'";

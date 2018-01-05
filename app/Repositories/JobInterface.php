@@ -16,4 +16,6 @@ interface JobInterface {
 
     public function search($request);
 
+    public function getAllAppliedJobs($userId);
+
 }

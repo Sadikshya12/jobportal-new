@@ -1,10 +1,14 @@
 <?php $this->render('includes/header') ?>
 
     <h1>My Account
-    <div class="pull-right">
-        <a href="/job/post_new" class="btn btn-success">Post New Job</a>
-        <a href="/job/posted" class="btn btn-info">View My Posted Jobs</a>
-    </div>
+
+        <?php if ($user->user_type == "Job Poster"): ?>
+            <div class="pull-right">
+                <a href="/job/post_new" class="btn btn-success">Post New Job</a>
+                <a href="/job/posted" class="btn btn-info">View My Posted Jobs</a>
+            </div>
+        <?php endif; ?>
+
     </h1>
     <div class="form-group">
         <label>First name</label>
