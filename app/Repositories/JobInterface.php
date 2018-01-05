@@ -14,4 +14,6 @@ interface JobInterface {
 
     public function delete($jobId);
 
+    public function search($request);
+
 }

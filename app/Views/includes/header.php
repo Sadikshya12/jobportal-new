@@ -34,10 +34,15 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="/index/contact">Contact</a></li>
                         </ul>
-                        <div class="col-sm-3 col-md-3" style="margin-left: 470px">
-                            <form class="navbar-form" role="search">
+                        <div class="col-md-6 col-md-offset-2">
+                            <form class="navbar-form" action="/job/search" role="search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search" name="q">
+                                    <input class="form-control" placeholder="Search Job"
+                                           name="title"
+                                           value="<?= isset($_GET['title']) ? $_GET['title'] : '' ?>">
+                                    <input class="form-control" placeholder="Location"
+                                           name="location"
+                                           value="<?= isset($_GET['location']) ? $_GET['location'] : '' ?>">
                                     <div class="input-group-btn">
                                         <button class="btn btn-default" type="submit"><i
                                                     class="glyphicon glyphicon-search"></i></button>

@@ -5,7 +5,8 @@ namespace App\Repositories\Mysql;
 use App\Core\Database;
 use App\Repositories\JobInterface;
 
-class MySQLJobRepository implements JobInterface {
+class MySQLJobRepository implements JobInterface
+{
 
     protected $db;
 
@@ -46,5 +47,28 @@ class MySQLJobRepository implements JobInterface {
     public function delete($jobId)
     {
         return $this->db->delete($jobId);
+    }
+
+    public function search($request)
+    {
+
+        $conditions = [];
+
+        $this->db->select('*');
+
+        if (isset($request['title'])) {
+            $conditions['title LIKE'] = "%".$request['title']."%";
+        }
+
+        if (isset($request['location'])) {
+            $conditions['location LIKE'] = "%".$request['location']."%";
+        }
+
+        $this->db->where($conditions);
+
+        $result = $this->db->fetch_rows();
+
+        return $result;
+
     }
 }

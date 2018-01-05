@@ -53,6 +53,11 @@ class JobService
         return $this->job->delete($jobId);
     }
 
+    public function search($request)
+    {
+        return $this->job->search($request);
+    }
+
 }
 
 ?>

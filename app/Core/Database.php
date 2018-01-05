@@ -77,7 +77,15 @@ class Database
 
         $conditions = [];
         foreach ($data as $key => $value) {
-            $conditions[] = "`$key` = '$value'";
+
+            list($column, $operator) = explode(' ', $key);
+
+            if(isset($operator)){
+                $conditions[] = "`$column` $operator '$value'";
+            } else {
+                $conditions[] = "`$column` = '$value'";
+            }
+
         }
 
         $this->sql .= " WHERE " . implode(" AND ", $conditions);
@@ -122,6 +130,10 @@ class Database
     {
         $this->sql = "DELETE FROM $this->table WHERE id = $jobId";
         return $this->db->query($this->sql);
+    }
+
+    public function last_query(){
+        return $this->sql;
     }
 
 }
