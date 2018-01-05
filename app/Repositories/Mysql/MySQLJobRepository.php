@@ -18,7 +18,9 @@ class MySQLJobRepository implements JobInterface
 
     public function getAllLatest()
     {
-        $sql = "select * from jobs";
+        $sql = "select users.*, jobs.* from jobs";
+        $sql .= " join users on users.id = jobs.user_id";
+
         $data = $this->db->raw_query($sql)->fetch_rows();
         return $data;
     }
@@ -74,8 +76,9 @@ class MySQLJobRepository implements JobInterface
 
     public function getAllAppliedJobs($userId)
     {
-        $sql = "SELECT jobs.* FROM jobs";
+        $sql = "SELECT users.*, jobs.*, applications.created_at as a_created_at FROM jobs";
         $sql .= " JOIN applications ON applications.job_id = jobs.id";
+        $sql .= " JOIN users ON users.id = jobs.user_id";
         $sql .= " WHERE applications.user_id = $userId";
 
         $result = $this->db->raw_query($sql)->fetch_rows();

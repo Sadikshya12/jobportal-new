@@ -9,6 +9,12 @@
             </div>
         <?php endif; ?>
 
+        <?php if ($user->user_type == "Job Seeker"): ?>
+            <div class="pull-right">
+                <a href="/job/applied" class="btn btn-info">View My Applied Jobs</a>
+            </div>
+        <?php endif; ?>
+
     </h1>
     <div class="form-group">
         <label>First name</label>
