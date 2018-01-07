@@ -6,6 +6,6 @@
 <?= $job->description ?>
 
     <br>
-    <a href="/job/apply/<?= $job->id ?>" class="btn btn-success">Apply this job</a>
+    <a href="/seeker/apply/<?= $job->id ?>" class="btn btn-success">Apply this job</a>
 
 <?php $this->render('includes/footer') ?>

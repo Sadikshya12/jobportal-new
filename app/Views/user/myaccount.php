@@ -4,13 +4,13 @@
         <div class="pull-right">
 
             <?php if ($user->user_type == "Job Poster"): ?>
-                <a href="/job/post_new" class="btn btn-success">Post New Job</a>
-                <a href="/job/posted" class="btn btn-info">View My Posted Jobs</a>
-                <a href="/job/applications" class="btn btn-warning">Received Applications</a>
+                <a href="/poster/post_new" class="btn btn-success">Post New Job</a>
+                <a href="/poster/posted" class="btn btn-info">View My Posted Jobs</a>
+                <a href="/poster/applications" class="btn btn-warning">Received Applications</a>
             <?php endif; ?>
 
             <?php if ($user->user_type == "Job Seeker"): ?>
-                <a href="/job/applied" class="btn btn-info">View My Applied Jobs</a>
+                <a href="/seeker/applied" class="btn btn-info">View My Applied Jobs</a>
             <?php endif; ?>
 
             <a href="/user/edit" class="btn btn-success">Edit Account Details</a>

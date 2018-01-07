@@ -46,10 +46,10 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                                 <li>
-                                    <a href="/job/accept_application/<?= $application->id ?>">Accept Application</a>
+                                    <a href="/poster/accept_application/<?= $application->id ?>">Accept Application</a>
                                 </li>
                                 <li>
-                                    <a href="/job/reject_application/<?= $application->id ?>">Reject Application</a>
+                                    <a href="/poster/reject_application/<?= $application->id ?>">Reject Application</a>
                                 </li>
                                 <li>
                                     <a href="/user/review/<?= $application->user_id ?>">Review Job Seeker</a>

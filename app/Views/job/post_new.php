@@ -1,7 +1,7 @@
 <?php $this->render('includes/header') ?>
 
     <h1>New Job Post</h1>
-    <form action="/job/post_new" method="post">
+    <form action="/poster/post_new" method="post">
         <div class="form-group">
             <label>Title</label>
             <input class="form-control" name="title" value="<?= input('title') ?>">

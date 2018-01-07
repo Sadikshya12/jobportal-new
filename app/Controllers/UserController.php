@@ -75,21 +75,6 @@ class UserController extends Controller
         return $this->render('user/review', $view_data);
     }
 
-    public function reviews($userId)
-    {
-
-        $user = $this->userService->findById($userId);
-        if (!$user) {
-            die('User not found. Invalid user id.');
-        }
-
-        $reviews = $this->userService->getAllReviewsReceived($userId);
-
-        $view_data['user'] = $user;
-        $view_data['reviews'] = $reviews;
-        return $this->render('user/reviews', $view_data);
-    }
-
     public function edit()
     {
         $user = $this->userService->findById($this->session->get('logged_in_user_id'));
@@ -144,4 +129,5 @@ class UserController extends Controller
         $view_data['user'] = $user;
         return $this->render('user/password', $view_data);
     }
+
 }

@@ -42,7 +42,7 @@
                                 </td>
                                 <td><?= $job->location ?></td>
                                 <td>
-                                    <a href="/user/reviews/<?= $job->user_id ?>">
+                                    <a href="/index/user/<?= $job->user_id ?>">
                                         <?= $job->first_name . ' ' . $job->second_name ?>
                                     </a>
                                 </td>

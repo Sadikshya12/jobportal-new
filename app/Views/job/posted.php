@@ -1,7 +1,7 @@
 <?php $this->render('includes/header') ?>
     <h1>Jobs | Posted
         <div class="pull-right">
-            <a href="/job/post_new" class="btn btn-success">Post New Job</a>
+            <a href="/poster/post_new" class="btn btn-success">Post New Job</a>
         </div>
     </h1>
     <?php display_flash() ?>
@@ -23,7 +23,7 @@
                     <td><?= $job->created_at ?></td>
                     <td>
                         <a href="/job/details/<?= $job->id ?>" class="btn btn-success">View Details</a>
-                        <a href="/job/delete/<?= $job->id ?>" class="btn btn-danger"
+                        <a href="/poster/delete/<?= $job->id ?>" class="btn btn-danger"
                            onclick="return confirm('Confirm delete?')">Delete</a>
                     </td>
                 </tr>

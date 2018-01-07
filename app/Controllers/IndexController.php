@@ -8,6 +8,7 @@ use App\Core\Database;
 use App\Core\Model;
 use App\Core\Session;
 use App\Repositories\Mysql\MySQLJobRepository;
+use App\Repositories\Mysql\MySQLReviewRepository;
 use App\Repositories\Mysql\MySQLUserRepository;
 use App\Services\JobService;
 use App\Services\UserService;
@@ -15,10 +16,15 @@ use App\Services\UserService;
 class IndexController extends Controller
 {
     protected $userService;
+    protected $jobService;
 
     public function __construct()
     {
-        $this->userService = new UserService(new MySQLUserRepository(new Database()));
+        parent::__construct();
+        $this->userService = new UserService(
+            new MySQLUserRepository(new Database()),
+            new MySQLReviewRepository(new Database())
+        );
         $this->jobService = new JobService(new MySQLJobRepository(new Database()));
     }
 
@@ -109,6 +115,21 @@ class IndexController extends Controller
         }
 
         return $this->render('register');
+    }
+
+    public function user($userId)
+    {
+
+        $user = $this->userService->findById($userId);
+        if (!$user) {
+            die('User not found. Invalid user id.');
+        }
+
+        $reviews = $this->userService->getAllReviewsReceived($user->id);
+
+        $view_data['user'] = $user;
+        $view_data['reviews'] = $reviews;
+        return $this->render('user/reviews', $view_data);
     }
 
 

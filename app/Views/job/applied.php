@@ -20,7 +20,7 @@
                     <td><?= $job->a_created_at ?></td>
                     <td><?= $job->title ?></td>
                     <td>
-                        <a href="/user/reviews/<?= $job->user_id ?>">
+                        <a href="/index/user/<?= $job->user_id ?>">
                             <?= $job->first_name . ' ' . $job->second_name ?>
                         </a>
                     </td>
@@ -49,7 +49,7 @@
                                     <a href="/job/details/<?= $job->id ?>">View Details</a>
                                 </li>
                                 <li>
-                                    <a href="/job/cancel/<?= $job->id ?>">Cancel Application</a>
+                                    <a href="/seeker/cancel/<?= $job->id ?>">Cancel Application</a>
                                 </li>
                                 <li>
                                     <a href="/user/review/<?= $job->user_id ?>">Review Job Poster</a>
