@@ -1,6 +1,6 @@
 <?php $this->render('includes/header') ?>
     <div row="class">
-        <form id="register" action="/index/register" method="post">
+        <form id="register" action="/index/register" method="post" enctype="multipart/form-data">
             <h3>Registration</h3>
             <?php display_flash() ?>
             <table align="center" width="30%" border="0">
@@ -15,6 +15,12 @@
                     <td><input type="text" placeholder="Second Name" class="required"
                                name="sname"
                                value="<?= input('sname') ?>"></td>
+                </tr>
+                <tr>
+                    <td>Photo:</td>
+                    <td>
+                        <input type="file" class="required"
+                               name="photo"></td>
                 </tr>
                 <tr>
                     <td>Username:</td>

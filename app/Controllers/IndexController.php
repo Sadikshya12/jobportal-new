@@ -96,7 +96,9 @@ class IndexController extends Controller
     {
         if ($_POST) {
             try {
-                $this->userService->registerWithPostData($_POST);
+                $userId = $this->userService->registerWithPostData($_POST);
+                $this->userService->uploadPhoto($_FILES, $userId);
+
                 set_flash('success', 'Register success.');
                 $this->redirect('/index/login');
             } catch (\Exception $e) {

@@ -172,4 +172,8 @@ class Database
         return $this->sql;
     }
 
+    public function last_insert_id(){
+        return $this->db->insert_id;
+    }
+
 }

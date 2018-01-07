@@ -105,6 +105,22 @@ class UserService
     {
         return $this->review->getAllByToUserId($userId);
     }
+
+    public function uploadPhoto($files, $userId)
+    {
+        $tmp_name = $files['photo']['tmp_name'];
+        $name = $files['photo']['name'];
+        $ext = pathinfo($name, PATHINFO_EXTENSION);
+        $newFileName = date('YmdHis').".".$ext;
+
+        move_uploaded_file($tmp_name, 'uploads'.DIRECTORY_SEPARATOR.$newFileName);
+
+        return $this->user->update([
+            'photo' => $newFileName
+        ], [
+            'id' => $userId
+        ]);
+    }
 }
 
 ?>

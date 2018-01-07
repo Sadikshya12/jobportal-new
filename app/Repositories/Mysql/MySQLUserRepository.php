@@ -28,6 +28,8 @@ class MySQLUserRepository implements UserInterface
     public function create($userData)
     {
         $this->db->insert($userData);
+
+        return $this->db->last_insert_id();
     }
 
     public function findByUsername($username)
@@ -53,5 +55,10 @@ class MySQLUserRepository implements UserInterface
         return $this->db->where([
             'id' => $userId
         ])->fetch_row();
+    }
+
+    public function update($data, $cond)
+    {
+        return $this->db->update($data, $cond);
     }
 }

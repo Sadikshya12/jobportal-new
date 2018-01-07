@@ -13,4 +13,6 @@ interface UserInterface {
     public function findByEmail($email);
 
     public function findById($userId);
+
+    public function update($data, $cond);
 }
