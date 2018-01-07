@@ -103,7 +103,7 @@ class UserController extends Controller
 
                 $this->userService->update($_POST, $user);
 
-                if (isset($_FILES['photo']['name'])) {
+                if (isset($_FILES['photo']['name']) && $_FILES['photo']['name']) {
                     $this->userService->uploadPhoto($_FILES, $user->id);
                 }
 
@@ -118,5 +118,30 @@ class UserController extends Controller
 
         $view_data['user'] = $user;
         return $this->render('user/edit', $view_data);
+    }
+
+    public function password(){
+        $user = $this->userService->findById($this->session->get('logged_in_user_id'));
+        if (!$user) {
+            die('User not found. Invalid user id.');
+        }
+
+        if ($_POST) {
+
+            try {
+
+                $this->userService->changePassword($_POST, $user);
+
+                set_flash('success', 'Password updated.');
+                $this->redirect('/user/myaccount');
+
+            } catch (\Exception $e) {
+                set_flash('danger', $e->getMessage());
+                $this->redirect('/user/password');
+            }
+        }
+
+        $view_data['user'] = $user;
+        return $this->render('user/password', $view_data);
     }
 }

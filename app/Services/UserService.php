@@ -159,6 +159,25 @@ class UserService
         ]);
 
     }
+
+    public function changePassword($request, $user)
+    {
+        if($user->password != $request['old_password']){
+            throw new \Exception('Old password do not match.');
+        }
+
+        if($request['new_password'] != $request['new_password_confirmation']){
+            throw new \Exception('New passwords do not match.');
+        }
+
+        if (strlen($request['new_password']) < 6) {
+            throw new \Exception('Password must be atleast 6 character long.');
+        }
+
+        return $this->user->update([
+            'password' => $request['new_password']
+        ], ['id' => $user->id]);
+    }
 }
 
 ?>

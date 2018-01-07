@@ -14,6 +14,7 @@
             <?php endif; ?>
 
             <a href="/user/edit" class="btn btn-success">Edit Account Details</a>
+            <a href="/user/password" class="btn btn-success">Change Password</a>
         </div>
     </h1>
 <?php display_flash() ?>
