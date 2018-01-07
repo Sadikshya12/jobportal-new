@@ -6,6 +6,7 @@
             <div class="pull-right">
                 <a href="/job/post_new" class="btn btn-success">Post New Job</a>
                 <a href="/job/posted" class="btn btn-info">View My Posted Jobs</a>
+                <a href="/job/applications" class="btn btn-warning">Received Applications</a>
             </div>
         <?php endif; ?>
 

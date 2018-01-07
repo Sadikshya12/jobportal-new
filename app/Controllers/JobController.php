@@ -40,7 +40,7 @@ class JobController extends Controller
     public function details($job_id)
     {
         $job = $this->jobService->getById($job_id);
-        if(!$job){
+        if (!$job) {
             die('Job not found. Invalid job id.');
         }
 
@@ -130,13 +130,44 @@ class JobController extends Controller
         $this->redirect('/job/applied');
     }
 
-    public function applied(){
+    public function applied()
+    {
 
         $jobs = $this->jobService->getAllAppliedJobs($this->session->get('logged_in_user_id'));
 
         $view_data['jobs'] = $jobs;
         $this->render('job/applied', $view_data);
 
+    }
+
+    public function cancel($jobId)
+    {
+        $job = $this->jobService->getById($jobId);
+        if (!$job) {
+            die('Invalid job id.');
+        }
+
+        if ($_POST) {
+            try {
+                $this->jobService->cancel($_POST, $job->id, $this->session->get('logged_in_user_id'));
+
+                set_flash('success', 'Job application cancelled.');
+                $this->redirect('/job/applied');
+
+            } catch (\Exception $e) {
+                set_flash('danger', $e->getMessage());
+                $this->redirect('/job/applied');
+            }
+        }
+
+        $view_data['job'] = $job;
+        $this->render('job/cancel', $view_data);
+    }
+
+    public function applications(){
+        $applications = $this->jobService->getAllReceivedApplications($this->session->get('logged_in_user_id'));
+        $view_data['applications'] = $applications;
+        $this->render('job/applications', $view_data);
     }
 
 }

@@ -76,7 +76,7 @@ class MySQLJobRepository implements JobInterface
 
     public function getAllAppliedJobs($userId)
     {
-        $sql = "SELECT users.*, jobs.*, applications.created_at as a_created_at FROM jobs";
+        $sql = "SELECT applications.*, users.*, jobs.*, applications.created_at as a_created_at FROM jobs";
         $sql .= " JOIN applications ON applications.job_id = jobs.id";
         $sql .= " JOIN users ON users.id = jobs.user_id";
         $sql .= " WHERE applications.user_id = $userId";

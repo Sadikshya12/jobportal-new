@@ -32,4 +32,29 @@ class MySQLApplicationRepository implements ApplicationInterface
             ])
             ->fetch_row();
     }
+
+    public function update($appData, $condition)
+    {
+        return $this->db
+            ->update($appData, $condition);
+    }
+
+    public function findById($applicationId)
+    {
+        return $this->db
+            ->where([
+                'id' => $applicationId
+            ])
+            ->fetch_row();
+    }
+
+    public function getAllReceivedApplications($userId)
+    {
+        $sql = "select users.*, jobs.*, applications.* from applications";
+        $sql .= " join jobs on jobs.id = applications.job_id";
+        $sql .= " join users on users.id = applications.user_id";
+        $sql .= " where jobs.user_id = $userId";
+
+        return $this->db->raw_query($sql)->fetch_rows();
+    }
 }

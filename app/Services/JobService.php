@@ -85,6 +85,29 @@ class JobService
         return $this->job->getAllAppliedJobs($userId);
     }
 
+    public function cancel($request, $jobId, $userId)
+    {
+
+        $application = $this->application->findByJobAndUserId($jobId, $userId);
+        if(!$application){
+            throw new \Exception('Application not found.');
+        }
+
+        $appData = [
+            'status' => 'cancelled',
+            'cancel_reason' => $request['cancel_reason']
+        ];
+
+        return $this->application->update($appData, [
+            'id' => $application->id
+        ]);
+    }
+
+    public function getAllReceivedApplications($userId)
+    {
+        return $this->application->getAllReceivedApplications($userId);
+    }
+
 }
 
 ?>

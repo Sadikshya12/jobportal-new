@@ -38,10 +38,6 @@ class Database
         }
     }
 
-    /**
-     * @param $data
-     * @return \mysqli_result
-     */
     public function insert($data)
     {
         $data['created_at'] = isset($data['created_at']) ? $data['created_at'] : date('Y-m-d H:i:s');
@@ -54,6 +50,43 @@ class Database
         $this->sql = "INSERT INTO " . $this->table;
         $this->sql .= "(`" . implode('`,`', $fields) . "`)";
         $this->sql .= "VALUES('" . implode("','", $data) . "')";
+
+        // run and return the query result resource
+        return $this->db->query($this->sql);
+    }
+
+    public function update($data, $conditions){
+        $data['updated_at'] = isset($data['updated_at']) ? $data['updated_at'] : date('Y-m-d H:i:s');
+
+        // build the query
+        $this->sql = "UPDATE " . $this->table;
+
+        $this->sql .= " SET ";
+
+        $sets = [];
+        foreach($data as $field => $value){
+            $sets[] = $field." = '".$value."'";
+        }
+
+        $this->sql .= implode(', ', $sets);
+
+        $conds = [];
+        foreach ($conditions as $key => $value) {
+
+            $exploded = explode(' ', $key);
+
+            $column = isset($exploded[0]) ? $exploded[0] : null;
+            $operator = isset($exploded[1]) ? $exploded[1] : null;
+
+            if($operator){
+                $conds[] = "`$column` $operator '$value'";
+            } else {
+                $conds[] = "`$column` = '$value'";
+            }
+
+        }
+
+        $this->sql .= " WHERE " . implode(" AND ", $conds);
 
         // run and return the query result resource
         return $this->db->query($this->sql);
