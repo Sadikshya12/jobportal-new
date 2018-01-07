@@ -4,7 +4,7 @@
         <p class="form-control-static"><?= $user->first_name . ' ' . $user->second_name ?></p>
     </div>
 <h3>Reviews</h3>
-
+<?php display_flash() ?>
 <table class="table">
     <thead>
     <tr>

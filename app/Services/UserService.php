@@ -108,6 +108,16 @@ class UserService
 
     public function uploadPhoto($files, $userId)
     {
+
+        $user = $this->findById($userId);
+        if(!$user){
+            throw new \Exception('Invalid user id.');
+        }
+
+        if($user->photo && file_exists('uploads'.DIRECTORY_SEPARATOR.$user->photo)){
+            unlink('uploads'.DIRECTORY_SEPARATOR.$user->photo);
+        }
+
         $tmp_name = $files['photo']['tmp_name'];
         $name = $files['photo']['name'];
         $ext = pathinfo($name, PATHINFO_EXTENSION);
@@ -120,6 +130,34 @@ class UserService
         ], [
             'id' => $userId
         ]);
+    }
+
+    public function update($request, $user)
+    {
+
+        $u = $this->user->findByUsername($request['username']);
+        if ($u && $u->id != $user->id) {
+            throw new \Exception('Username already exists.');
+        }
+
+        $u = $this->user->findByEmail($request['email']);
+        if ($u && $u->id != $user->id) {
+            throw new \Exception('Email already exists.');
+        }
+
+        $userData = [
+            'first_name' => $request['first_name'],
+            'second_name' => $request['second_name'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'address' => $request['address'],
+            'country' => $request['country']
+        ];
+
+        return $this->user->update($userData, [
+            'id' => $user->id
+        ]);
+
     }
 }
 

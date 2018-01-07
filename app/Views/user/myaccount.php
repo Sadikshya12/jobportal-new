@@ -16,6 +16,7 @@
             <a href="/user/edit" class="btn btn-success">Edit Account Details</a>
         </div>
     </h1>
+<?php display_flash() ?>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">

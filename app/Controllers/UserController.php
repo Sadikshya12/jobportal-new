@@ -68,7 +68,7 @@ class UserController extends Controller
             }
 
             set_flash('success', 'Review posted.');
-            $this->redirect('/user/reviews/'.$jobPoster->id);
+            $this->redirect('/user/reviews/' . $jobPoster->id);
         }
 
         $view_data['jobPoster'] = $jobPoster;
@@ -88,5 +88,35 @@ class UserController extends Controller
         $view_data['user'] = $user;
         $view_data['reviews'] = $reviews;
         return $this->render('user/reviews', $view_data);
+    }
+
+    public function edit()
+    {
+        $user = $this->userService->findById($this->session->get('logged_in_user_id'));
+        if (!$user) {
+            die('User not found. Invalid user id.');
+        }
+
+        if ($_POST) {
+
+            try {
+
+                $this->userService->update($_POST, $user);
+
+                if (isset($_FILES['photo']['name'])) {
+                    $this->userService->uploadPhoto($_FILES, $user->id);
+                }
+
+                set_flash('success', 'Profile updated.');
+                $this->redirect('/user/myaccount');
+
+            } catch (\Exception $e) {
+                set_flash('danger', $e->getMessage());
+                $this->redirect('/user/edit');
+            }
+        }
+
+        $view_data['user'] = $user;
+        return $this->render('user/edit', $view_data);
     }
 }
