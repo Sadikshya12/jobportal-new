@@ -32,7 +32,7 @@
                             <br><strong>Reason:</strong>
                             <?= $job->cancel_reason ?>
                         <?php elseif ($job->status == 'accepted'): ?>
-                            <span class="label label-green">Accepted</span>
+                            <span class="label label-success">Accepted</span>
                         <?php elseif ($job->status == 'rejected'): ?>
                             <span class="label label-danger">Rejected</span>
                         <?php endif; ?>
@@ -56,7 +56,6 @@
                                 </li>
                             </ul>
                         </div>
-
                     </td>
                 </tr>
             <?php endforeach; ?>

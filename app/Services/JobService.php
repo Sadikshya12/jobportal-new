@@ -108,6 +108,15 @@ class JobService
         return $this->application->getAllReceivedApplications($userId);
     }
 
+    public function updateApplicationStatus($status, $applicationId)
+    {
+        return $this->application->update([
+            'status' => $status
+        ], [
+            'id' => $applicationId
+        ]);
+    }
+
 }
 
 ?>

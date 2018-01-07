@@ -9,7 +9,7 @@
             <th>Title</th>
             <th width="15%">Applied By</th>
             <th>Status</th>
-            <th width="25%">Actions</th>
+            <th width="5%">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -32,13 +32,30 @@
                             <br><strong>Reason:</strong>
                             <?= $application->cancel_reason ?>
                         <?php elseif ($application->status == 'accepted'): ?>
-                            <span class="label label-green">Accepted</span>
+                            <span class="label label-success">Accepted</span>
                         <?php elseif ($application->status == 'rejected'): ?>
                             <span class="label label-danger">Rejected</span>
                         <?php endif; ?>
                     </td>
                     <td>
-                        <a href="/user/review/<?= $application->user_id ?>" class="btn btn-danger">Review Job Seeker</a>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li>
+                                    <a href="/job/accept_application/<?= $application->id ?>">Accept Application</a>
+                                </li>
+                                <li>
+                                    <a href="/job/reject_application/<?= $application->id ?>">Reject Application</a>
+                                </li>
+                                <li>
+                                    <a href="/user/review/<?= $application->user_id ?>">Review Job Seeker</a>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>

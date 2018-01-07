@@ -170,4 +170,38 @@ class JobController extends Controller
         $this->render('job/applications', $view_data);
     }
 
+    public function accept_application($applicationId){
+
+        try{
+            $this->jobService->updateApplicationStatus(
+                'accepted',
+                $applicationId,
+                $this->session->get('logged_in_user_id')
+            );
+            set_flash('success', 'Application accepted.');
+            $this->redirect('/job/applications');
+        } catch (\Exception $e){
+            set_flash('danger', $e->getMessage());
+            $this->redirect('/job/applications');
+        }
+
+    }
+
+    public function reject_application($applicationId){
+
+        try{
+            $this->jobService->updateApplicationStatus(
+                'rejected',
+                $applicationId,
+                $this->session->get('logged_in_user_id')
+            );
+            set_flash('success', 'Application rejected.');
+            $this->redirect('/job/applications');
+        } catch (\Exception $e){
+            set_flash('danger', $e->getMessage());
+            $this->redirect('/job/applications');
+        }
+
+    }
+
 }
