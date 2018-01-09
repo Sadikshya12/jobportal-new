@@ -85,4 +85,10 @@ class MySQLJobRepository implements JobInterface
         return $result;
     }
 
+    public function update($jobData, $jobId)
+    {
+        return $this->db->update($jobData, [
+            'id' => $jobId
+        ]);
+    }
 }

@@ -117,6 +117,16 @@ class JobService
         ]);
     }
 
+    public function updateJob($request, $jobId)
+    {
+        $jobData = [
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'location' => $request['location']
+        ];
+        return $this->job->update($jobData, $jobId);
+    }
+
 }
 
 ?>

@@ -18,4 +18,6 @@ interface JobInterface {
 
     public function getAllAppliedJobs($userId);
 
+    public function update($jobData, $jobId);
+
 }

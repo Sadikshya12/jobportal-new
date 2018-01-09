@@ -57,6 +57,35 @@ class PosterController extends Controller
 
     }
 
+    public function edit_job($jobId)
+    {
+        $job = $this->jobService->getById($jobId);
+        if (!$job) {
+            die('Job not found.');
+        }
+
+        if ($job->user_id != $this->session->get('logged_in_user_id')) {
+            die('Unauthorized access.');
+        }
+
+        if($_POST){
+
+            try{
+                $this->jobService->updateJob($_POST, $job->id);
+                set_flash('success', 'Job updated.');
+                return $this->redirect('/poster/posted');
+            } catch (\Exception  $e){
+                set_flash('danger', $e->getMessage());
+                return $this->redirect('/poster/posted');
+            }
+
+        }
+
+        $view_data['job'] = $job;
+        return $this->render('job/edit', $view_data);
+
+    }
+
     public function posted()
     {
         if (!$this->userService->isJobPoster($this->session->get('logged_in_user_id'))) {
@@ -70,15 +99,17 @@ class PosterController extends Controller
 
     }
 
-    public function applications(){
+    public function applications()
+    {
         $applications = $this->jobService->getAllReceivedApplications($this->session->get('logged_in_user_id'));
         $view_data['applications'] = $applications;
         $this->render('job/applications', $view_data);
     }
 
-    public function accept_application($applicationId){
+    public function accept_application($applicationId)
+    {
 
-        try{
+        try {
             $this->jobService->updateApplicationStatus(
                 'accepted',
                 $applicationId,
@@ -86,16 +117,17 @@ class PosterController extends Controller
             );
             set_flash('success', 'Application accepted.');
             $this->redirect('/poster/applications');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             set_flash('danger', $e->getMessage());
             $this->redirect('/poster/applications');
         }
 
     }
 
-    public function reject_application($applicationId){
+    public function reject_application($applicationId)
+    {
 
-        try{
+        try {
             $this->jobService->updateApplicationStatus(
                 'rejected',
                 $applicationId,
@@ -103,7 +135,7 @@ class PosterController extends Controller
             );
             set_flash('success', 'Application rejected.');
             $this->redirect('/poster/applications');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             set_flash('danger', $e->getMessage());
             $this->redirect('/poster/applications');
         }
