@@ -10,6 +10,19 @@ use PHPUnit_Framework_TestCase;
 
 class JobServiceTest extends PHPUnit_Framework_TestCase
 {
+    protected $mockedJobRepo;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->mockedJobRepo = $this->createMock(JobInterface::class);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        unset($this->mockedJobRepo);
+    }
 
     public function testGetAllLatest()
     {
@@ -20,40 +33,42 @@ class JobServiceTest extends PHPUnit_Framework_TestCase
         $result = [$row];
 
         // Mock job repo
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('getAllLatest')
+        $this->mockedJobRepo
+            ->method('getAllLatest')
             ->willReturn($result);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
         $latestJobs = $job->getAllLatest();
 
         $this->assertEquals(1, $this->count($latestJobs));
 
     }
 
-    public function testGetById(){
+    public function testGetById()
+    {
 
         $row = new \stdClass();
         $row->id = 1;
         $row->name = 'test';
 
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('getById')
+        $this->mockedJobRepo
+            ->method('getById')
             ->willReturn($row);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
         $jobById = $job->getById(1);
 
         $this->assertObjectHasAttribute('id', $jobById);
     }
 
-    public function testPostNewJob(){
+    public function testPostNewJob()
+    {
 
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('create')
+        $this->mockedJobRepo
+            ->method('create')
             ->willReturn(true);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
         $result = $job->postNewJob([
             'title' => 'hello',
             'description' => 'world',
@@ -63,7 +78,8 @@ class JobServiceTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
-    public function testGetByUserId(){
+    public function testGetByUserId()
+    {
 
         $row = new \stdClass();
         $row->id = 1;
@@ -71,63 +87,58 @@ class JobServiceTest extends PHPUnit_Framework_TestCase
         $result = [$row];
 
         // Mock job repo
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('findByUserId')
+        $this->mockedJobRepo
+            ->method('findByUserId')
             ->willReturn($result);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
         $result = $job->getByUserId(1);
 
         $this->assertEquals(1, $this->count($result));
     }
 
-    public function testDelete(){
+    public function testDelete()
+    {
 
         $row = new \stdClass();
         $row->id = 1;
         $row->user_id = 1;
 
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('delete')
+        $this->mockedJobRepo
+            ->method('delete')
             ->willReturn(true);
-        $jobRepo->method('getById')
+
+        $this->mockedJobRepo
+            ->method('getById')
             ->willReturn($row);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
         $result = $job->delete(1, 1);
 
         $this->assertTrue($result);
     }
 
-    public function testDeleteException(){
+    public function testDeleteException()
+    {
 
         $row = new \stdClass();
         $row->id = 1;
         $row->user_id = 2;
 
-        $jobRepo = $this->mockRepo();
-        $jobRepo->method('delete')
+        $this->mockedJobRepo
+            ->method('delete')
             ->willReturn(true);
-        $jobRepo->method('getById')
+
+        $this->mockedJobRepo
+            ->method('getById')
             ->willReturn($row);
 
-        $job = new JobService($jobRepo);
+        $job = new JobService($this->mockedJobRepo);
 
         $this->expectException(\Exception::class);
         $job->delete(1, 1);
 
     }
 
-    private function mockRepo(){
-        return $this->getMockBuilder(JobInterface::class)
-            ->setMethods([
-                'getAllLatest',
-                'getById',
-                'create',
-                'findByUserId',
-                'delete'
-            ])
-            ->getMock();
-    }
 
 }

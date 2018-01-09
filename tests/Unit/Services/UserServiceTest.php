@@ -9,6 +9,19 @@ use PHPUnit_Framework_TestCase;
 
 class UserServiceTest extends PHPUnit_Framework_TestCase
 {
+    protected $mockedUserRepo;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->mockedUserRepo = $this->createMock(UserInterface::class);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        unset($this->mockedUserRepo);
+    }
 
     /**
      * @dataProvider providerTestRegisterWithPostData
@@ -16,16 +29,19 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     public function testRegisterWithPostData($userByUserName, $userByEmail, $password)
     {
 
-        $userRepo = $this->mockRepo();
-        $userRepo->method('findByUsername')
+        $this->mockedUserRepo
+            ->method('findByUsername')
             ->willReturn($userByUserName);
-        $userRepo->method('findByEmail')
+
+        $this->mockedUserRepo
+            ->method('findByEmail')
             ->willReturn($userByEmail);
 
-        $userRepo->method('create')
+        $this->mockedUserRepo
+            ->method('create')
             ->willReturn(true);
 
-        $userService = new UserService($userRepo);
+        $userService = new UserService($this->mockedUserRepo);
 
         if($userByEmail || $userByUserName || strlen($password) < 6){
             $this->expectException(\Exception::class);
@@ -54,17 +70,6 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    private function mockRepo()
-    {
-        return $this->getMockBuilder(UserInterface::class)
-            ->setMethods([
-                'findByUserEmailPass',
-                'create',
-                'findByUsername',
-                'findByEmail',
-                'findById'
-            ])
-            ->getMock();
-    }
+
 
 }
