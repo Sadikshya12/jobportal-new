@@ -20,7 +20,7 @@
                     <td><?= $application->created_at ?></td>
                     <td><?= $application->title ?></td>
                     <td>
-                        <a href="/user/reviews/<?= $application->user_id ?>">
+                        <a href="/index/user/<?= $application->user_id ?>">
                             <?= $application->first_name . ' ' . $application->second_name ?>
                         </a>
                     </td>
